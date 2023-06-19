@@ -9,7 +9,6 @@ import board
 import digitalio
 import usb_hid
 from adafruit_hid.keyboard import Keyboard
-from adafruit_hid.keyboard_layout_us import KeyboardLayoutUS
 from adafruit_hid.keycode import Keycode
 
 # debug state
@@ -20,7 +19,6 @@ g_now = time.monotonic_ns()
 # The keyboard object!
 time.sleep(1)  # Sleep for a bit to avoid a race condition on some systems
 keyboard = Keyboard(usb_hid.devices)
-keyboard_layout = KeyboardLayoutUS(keyboard)  # We're in the US :)
 
 row_pins = [
     board.A0,
@@ -83,7 +81,10 @@ class KeyData:
                     self.down_time = g_now
                     print("Pressing key ", self.code, " at ", g_now)
 
-
+# Note that the keycodes here don't actually correspond to the generated
+# characters but rather the code we'd expect from a key in that position.
+# The keyboard layout on the OS maps those into the desired key.
+# RUN/STOP sends ALT
 key_table = [
     [
         KeyData(Keycode.BACKSPACE),        # 0,0
@@ -141,18 +142,18 @@ key_table = [
         KeyData(Keycode.L),                # 5,2
         KeyData(Keycode.MINUS),            # 5,3
         KeyData(Keycode.PERIOD),           # 5,4
-        KeyData(Keycode.LEFT_BRACKET),     # 5,5  (colon and curly)
-        KeyData(Keycode.A),                # 5,6  (should be @)
+        KeyData(Keycode.SEMICOLON),        # 5,5
+        KeyData(Keycode.LEFT_BRACKET),     # 5,6
         KeyData(Keycode.COMMA),            # 5,7
     ],
     [
         KeyData(Keycode.POUND),            # 6,0
         KeyData(Keycode.KEYPAD_ASTERISK),  # 6,1
-        KeyData(Keycode.SEMICOLON),        # 6,2
+        KeyData(Keycode.QUOTE),            # 6,2
         KeyData(Keycode.HOME),             # 6,3
         KeyData(Keycode.RIGHT_SHIFT),      # 6,4
         KeyData(Keycode.KEYPAD_EQUALS),    # 6,5
-        KeyData(Keycode.PAGE_UP),          # 6,6
+        KeyData(Keycode.BACKSLASH),          # 6,6
         KeyData(Keycode.FORWARD_SLASH),    # 6,7
     ],
     [
