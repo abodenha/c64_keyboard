@@ -148,23 +148,23 @@ key_table = [
         KeyData(Keycode.N),                # 4,7
     ],
     [
-        KeyData(Keycode.KEYPAD_PLUS),      # 5,0
+        KeyData(Keycode.MINUS),            # 5,0 (The + key)
         KeyData(Keycode.P),                # 5,1
         KeyData(Keycode.L),                # 5,2
-        KeyData(Keycode.MINUS),            # 5,3
+        KeyData(Keycode.EQUALS),           # 5,3 (The - key)
         KeyData(Keycode.PERIOD),           # 5,4
         KeyData(Keycode.SEMICOLON),        # 5,5
         KeyData(Keycode.LEFT_BRACKET),     # 5,6
         KeyData(Keycode.COMMA),            # 5,7
     ],
     [
-        KeyData(Keycode.POUND),            # 6,0
+        KeyData(Keycode.RIGHT_BRACKET),    # 6,0 (POUND key)
         KeyData(Keycode.KEYPAD_ASTERISK),  # 6,1
-        KeyData(Keycode.QUOTE),            # 6,2
+        KeyData(Keycode.QUOTE),            # 6,2 (; key)
         KeyData(Keycode.HOME),             # 6,3
         KeyData(Keycode.RIGHT_SHIFT),      # 6,4
-        KeyData(Keycode.KEYPAD_EQUALS),    # 6,5
-        KeyData(Keycode.BACKSLASH),          # 6,6
+        KeyData(Keycode.KEYPAD_PERIOD),    # 6,5
+        KeyData(Keycode.BACKSLASH),        # 6,6 (up arrow key)
         KeyData(Keycode.FORWARD_SLASH),    # 6,7
     ],
     [
