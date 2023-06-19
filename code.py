@@ -58,12 +58,18 @@ for pin in col_pins:
     key_pin.value = True
     col_key_pins.append(key_pin)
 
+# Restore key is special since it just connects direct to ground.
+# Handle separately but configure as an input with pullup like the others
+restore_pin = digitalio.DigitalInOut(board.D3)
+restore_pin.direction = digitalio.Direction.INPUT
+restore_pin.pull = digitalio.Pull.UP
 
 class KeyData:
-    def __init__(self, code):
+    def __init__(self, code, res_code = None):
         self.code = code
         self.down = False
         self.down_time = 0
+        self.res_code = res_code
 
     def handle_key(self, up):
         if (g_now - self.down_time) > g_debounce_time:
@@ -71,12 +77,17 @@ class KeyData:
                 if up:  # Released
                     if g_output_keypress:
                         keyboard.release(self.code)
+                        if self.res_code is not None:
+                            keyboard.release(self.res_code)
                     self.down = False
                     print("Releasing key ", self.code, " at ", g_now)
             else:
                 if not up:  # Pressed
                     if g_output_keypress:
-                        keyboard.press(self.code)
+                        if self.res_code is not None and not restore_pin.value:
+                            keyboard.press(self.res_code)
+                        else:
+                            keyboard.press(self.code)
                     self.down = True
                     self.down_time = g_now
                     print("Pressing key ", self.code, " at ", g_now)
@@ -91,25 +102,25 @@ key_table = [
         KeyData(Keycode.RETURN),           # 0,1
         KeyData(Keycode.RIGHT_ARROW),      # 0,2
         KeyData(Keycode.F7),               # 0,3
-        KeyData(Keycode.F1),               # 0,4
-        KeyData(Keycode.F3),               # 0,5
-        KeyData(Keycode.F5),               # 0,6
+        KeyData(Keycode.F1, Keycode.F2),   # 0,4
+        KeyData(Keycode.F3, Keycode.F4),   # 0,5
+        KeyData(Keycode.F5, Keycode.F8),   # 0,6
         KeyData(Keycode.DOWN_ARROW),       # 0,7
     ],
     [
-        KeyData(Keycode.THREE),            # 1,0
-        KeyData(Keycode.W),                # 1,1
-        KeyData(Keycode.A),                # 1,2
+        KeyData(Keycode.THREE),               # 1,0
+        KeyData(Keycode.W, Keycode.UP_ARROW),                # 1,1
+        KeyData(Keycode.A, Keycode.LEFT_ARROW),                   # 1,2
         KeyData(Keycode.FOUR),             # 1,3
         KeyData(Keycode.Z),                # 1,4
-        KeyData(Keycode.S),                # 1,5
+        KeyData(Keycode.S, Keycode.DOWN_ARROW),                # 1,5
         KeyData(Keycode.E),                # 1,6
         KeyData(Keycode.LEFT_SHIFT),       # 1,7
     ],
     [
         KeyData(Keycode.FIVE),             # 2,0
         KeyData(Keycode.R),                # 2,1
-        KeyData(Keycode.D),                # 2,2
+        KeyData(Keycode.D, Keycode.RIGHT_ARROW),                # 2,2
         KeyData(Keycode.SIX),              # 2,3
         KeyData(Keycode.C),                # 2,4
         KeyData(Keycode.F),                # 2,5
