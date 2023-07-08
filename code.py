@@ -1,6 +1,6 @@
 # SPDX-FileCopyrightText: 2023 Albert Bodenhamer of Freaking Rad Kreative Network
 #
-# SPDX-License-Identifier: TBD
+# SPDX-License-Identifier: MIT
 
 """ Control code for C64 to USB keyboard adapter"""
 import time
