@@ -1,0 +1,7 @@
+Partlist exported from Team Hub: Albert Bodenhamer   Project: computer parts  Board: PCB v11 at 6/19/2023 8:45 PM
+
+Qty Value               Device              Package              Parts Description              CATEGORY  DESCRIPTION MANUFACTURER MPN OPERATING_TEMP PART_STATUS RATING ROHS_COMPLIANT SERIES SUB-CATEGORY THERMALLOSS TOLERANCE TYPE
+1   150                 R_AXIAL-7.2MM-PITCH RESAD724W46L381D178B R1    Resistor Fixed - Generic Resistor                                                                                       Fixed                                  
+1   C64_KEYBOARD_HEADER C64_KEYBOARD_HEADER C64_KEYBOARD_HEADER  U$1                                                                                                                                                                  
+1   ITSYBITSYM4EXP      ITSYBITSYM4EXP      ITSYBITSYM4EXP       U$2                                                                                                                                                                  
+1   PINHD-1X3           PINHD-1X3           1X03                 LED   PIN HEADER               CONNECTOR                                                                                      PIN-HEADER                             

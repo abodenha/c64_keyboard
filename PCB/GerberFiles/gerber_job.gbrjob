@@ -1,0 +1,24 @@
+{
+    "Header": {
+        "Comment": "All values are metric (mm)",
+        "CreationDate": "2023-06-20T03:45:33Z",
+        "GenerationSoftware": {
+            "Application": "Fusion 360 Electronics",
+            "Vendor": "Autodesk",
+            "Version": "9.7.0"
+        },
+        "Part": "Single"
+    },
+    "Overall": {
+        "BoardThickness": 1.57,
+        "LayerNumber": 2,
+        "Name": {
+            "ProjectId": "PCB v11"
+        },
+        "Owner": "Albert Bodenhamer <albert@readers-indigestion.com>",
+        "Size": {
+            "X": 54.61,
+            "Y": 34.29
+        }
+    }
+}
