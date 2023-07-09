@@ -1,4 +1,4 @@
-# SPDX-FileCopyrightText: 2023 Albert Bodenhamer of Freaking Rad Kreative Network
+# SPDX-FileCopyrightText: 2023 Freaking Rad Kreative Network
 #
 # SPDX-License-Identifier: MIT
 """ boot.py for C64 to USB keyboard adapter"""

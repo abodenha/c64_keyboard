@@ -1,4 +1,4 @@
-# SPDX-FileCopyrightText: 2023 Albert Bodenhamer of Freaking Rad Kreative Network
+# SPDX-FileCopyrightText: 2023 Freaking Rad Kreative Network
 #
 # SPDX-License-Identifier: MIT
 
@@ -11,9 +11,14 @@ import usb_hid
 from adafruit_hid.keyboard import Keyboard
 from adafruit_hid.keycode import Keycode
 
-# debug state
+# For debugging. Set this to False to prevent events from actually being sent over USB.
 g_output_keypress = True
+
+# Time in ns used for debouncing a key. The code igores anything else happening on a key
+# for this long after a key press.
 g_debounce_time = 50 * 1000000
+
+# Current time used for debounce logic.
 g_now = time.monotonic_ns()
 
 # The keyboard object!
@@ -195,6 +200,5 @@ while True:
         for row in row_key_pins:
             y = row_key_pins.index(row)
             key_table[x][y].handle_key(row.value)
-            # print("Handling key ", x, " ", y)
         col.value = True  # Pull it back high to prep for the next step in the scan.
-    # time.sleep(0.05)
+

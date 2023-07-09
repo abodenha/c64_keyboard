@@ -8,16 +8,20 @@ Right now, you'll need to source all of the parts yourself. It requires basic so
 I've been into collecting and repairing 80s home computers lately and one thing I often chuckle at is that I often eBay see listings for "Commodore 64 Keyboard". Some people just can't get their heads around the idea that computer and keyboard in a single case and connected to an external display was once a common format. They see a plastic case with buttons and their brain just says "Oh, that must just be the keyboard part."
 
 This project was born when my wife said she really liked the feel of typing on a C64 and that it would be fun if she could use it to type on her modern computer.
+
 Mostly, this gave me a chance to learn how to make PCBs with Fusion 360 and to get familiar with CircuitPython. Beyond that, it was just a fun hack.
+
+## License info
+The code and board designs are released under the MIT license. See LICENSE.txt
 
 ## Assembly & Setup
 ### Parts needed
 * [ItsyBitsy M4 Express](https://www.adafruit.com/product/3800)
 * Both [male](https://www.adafruit.com/product/4173) and [female](https://www.adafruit.com/product/4174) headers for the ItsyBitsy M4
 * Pin headers that'll fit the C64 keyboard cable and LED connector. I used [these](https://www.digikey.com/en/products/detail/molex/0022284360/313821).
-* The PCB. You can grab the files here and make your own, order from my PCBWay listing, or order my extras from FRKNetwork
-* A 150ohm through-hole resistor
-* A C64 case, keyboard, and power LED.
+* The PCB. You can grab the files here and make your own, order from my PCBWay listing, or order my extras from FRKNetwork.
+* A 150ohm through-hole resistor (optional if you want the power LED lit)
+* A C64 case, keyboard, and power LED (optional).
 
 If you don't care about having the power LED light up, you can leave out the resistor and pins on the LED connector.
 
@@ -90,7 +94,7 @@ Code.py also needs to keep track of which keys it has seen so that it can tell U
 
 When you push a key on the keyboard, it's pretty likely to bounce slightly. If I'm reading the keys really fast that bounce looks like the user released the key and then pressed it again. That gets really annoying when typing because you end up with a lot of double or triple typed letters.
 
-The fix is that when a key is pushed, code.py records not only that the key was pushed, but WHEN 
+The fix is that when a key is pushed, code.py records not only that the key was pushed, but WHEN. For some period of time after the initial key press, code.py discards any other activity it sees on that key. I have to set to 50ms which seems to work well. You can play with it by setting different values for g_debounce_time.
 
 ## What's next
 This first release is pretty clunky TBH. I'm counting on my wife to use it for a while to tell me what works and what needs tweaking. I'll almost certainly be adding more keys accessible via restore.
@@ -99,6 +103,13 @@ I already know that the board layout needs a bit of tweaking.
 * Pads are really close to the edge of the board. I want to move them back a bit.
 * The pads and holes for the keyboard header are a bit small. If you use pins big enough to properly fit the C64 keyboard connector they're hard to get into the holes on the PCB.
 * I need to add a trace on the LED header so that the LED will work in either orientation.
+
+## Known issues
+* If you have the ItsyBitsy M4 plugged into your computer when you power on it MIGHT prevent the computer from booting. I've tried on several machines, and it only happens on one machine with an MSI motherboard. What I think is happening is that CircuitPython inits the CIRCUITPY drive, and then it gets shut down by boot.py (that shouldn't happen). I'm going to keep exploring to try to find a good solution.  For now, there are several workarounds:
+** Delete boot.py from your CIRCUITPY drive. This means the CIRCUITPY drive will show up all the time, but everything else will work normally.
+** Hold restore while booting. This is basically the same as deleting boot.py.
+** Only plug the keyboard in AFTER your computer is up and running.
+** Connect the keyboard to a USB port that always has power even when the machine is in standby (off) or in sleep.
 
 ## FAQ
 Q: Can I use a different microcontroller?  
