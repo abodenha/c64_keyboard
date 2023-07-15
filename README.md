@@ -1,11 +1,11 @@
 # The C64 USB Keyboard
 ## What is it?
-This is a PCB, CircuitPython code, and keyboard layout that uses [Adafruit's ItsyBitsy M4 Express](https://www.adafruit.com/product/3800) turn a C64 into a USB keyboard you can use on a modern computer.
+This is a PCB, CircuitPython code, and keyboard layout that uses [Adafruit's ItsyBitsy M4 Express](https://www.adafruit.com/product/3800) to turn a C64 into a USB keyboard you can use on a modern computer.
 
 Right now, you'll need to source all of the parts yourself. It requires basic soldering skills but it's all through-hole parts. If there's enough interest, I might offer a kit or fully assembled unit for sale.
 
 ## But WHY?
-I've been into collecting and repairing 80s home computers lately and one thing I often chuckle at is that I often eBay see listings for "Commodore 64 Keyboard". Some people just can't get their heads around the idea that computer and keyboard in a single case and connected to an external display was once a common format. They see a plastic case with buttons and their brain just says "Oh, that must just be the keyboard part."
+I've been into collecting and repairing 80s home computers lately. One thing I often chuckle at is that I often eBay see listings for "Commodore 64 Keyboard". Some people can't get their heads around the idea that a computer and keyboard in a single case and connected to an external display was once a common format. They see a plastic case with buttons, and their brain says "Oh, that must just be the keyboard part."
 
 This project was born when my wife said she really liked the feel of typing on a C64 and that it would be fun if she could use it to type on her modern computer.
 
@@ -19,7 +19,7 @@ The code and board designs are released under the MIT license. See LICENSE.txt
 * [ItsyBitsy M4 Express](https://www.adafruit.com/product/3800)
 * Both [male](https://www.adafruit.com/product/4173) and [female](https://www.adafruit.com/product/4174) headers for the ItsyBitsy M4
 * Pin headers that'll fit the C64 keyboard cable and LED connector. I used [these](https://www.digikey.com/en/products/detail/molex/0022284360/313821).
-* The PCB. You can grab the files here and make your own, order from my PCBWay listing, or order my extras from FRKNetwork.
+* The PCB. You can grab the files here and make your own, order from [my PCBWay listing](https://www.pcbway.com/project/shareproject/C64_Keyboard_USB_converter_b96c5898.html), or order [my extras from FRKNetwork](https://frknetwork.com/products/c64-keyboard-conversion-pcb).
 * A 150ohm through-hole resistor (optional if you want the power LED lit)
 * A C64 case, keyboard, and power LED (optional).
 
@@ -30,11 +30,11 @@ If you don't care about having the power LED light up, you can leave out the res
 #### Set up the ItsyBitsy M4
 First follow [Adafruit's instructions](https://circuitpython.org/board/itsybitsy_m4_express/) to install CircuitPython 8 (7 should work but I haven't tested it.)
 
-When you connect the ItsyBitsy M4 to your computer you should see a removable drive called CIRCUITPY.
+When you connect the ItsyBitsy M4 to your computer, you should see a removable drive called CIRCUITPY.
 1. Install the HID library by copying [Adafruit's HID project bundle](https://learn.adafruit.com/circuitpython-essentials/circuitpython-hid-keyboard-and-mouse) onto CIRCUITPY.
 2. Copy boot.py and code.py onto CIRCUITPY
 
-The board should reboot and the CIRCUITPY drive should go away. If you need to get it back, you'll need to boot the board into safe mode (ask Google how). Once everything is assembled, you can get CIRCUITPY to come back by plugging in the board while holding down the Restore key on the keyboard.
+Unplug the board and plug it in again. The CIRCUITPY drive should go away. If you need to get it back, you'll need to boot the board into safe mode (ask Google how). Once everything is assembled, you can get CIRCUITPY to come back by plugging in the board while holding down the Restore key on the keyboard.
 
 #### Assemble the PCB
 1. Install the female headers for the ItsyBitsy M4 onto the front of the PCB. You might need to carefully trim the plastic to make them fit. Solder from the back.
@@ -47,7 +47,7 @@ The board should reboot and the CIRCUITPY drive should go away. If you need to g
 
 #### Optional: Set up the keyboard layout
 I set up the scan codes coming from the keyboard to roughly map to what would normally be in each location. That means key presses won't always map to what's on each key's silkscreen. Shift+2, for example, will give @ rather than ". I'd initially planned on mapping it all in the microcontroller, but things quickly got very weird with modifier keys. I could work around it, but each hack created problems that required another hack.
-Running the keyboard with a standard EN-US keyboard map works ok and might actually be more usable in some ways (muscle memory). If you want to get as close as possible to a TRUE C64 typing experience though, you'll want to install the keyboard layout.
+Running the keyboard with a standard EN-US keyboard map works ok and might actually be more usable in some ways (muscle memory). If you want to get as close as possible to a TRUE C64 typing experience, you'll want to install the keyboard layout on your PC.
 Right now, I only have a Windows layout created. I'll try to create Linux and Mac layouts later.
 To install for Windows:
 1. Grab us_c64.klc from the layouts folder in the C64_KEYBOARD repo.
@@ -56,7 +56,7 @@ To install for Windows:
 4. Hit Project > Build DLL and Setup Package
 5. Run the resulting setup.exe (click through the scary popups)
 
-You should now have a new keyboard layout in your taskbar. If you select it, the keys should behave much more in line with the silkscreens.
+You should now have a new keyboard layout in your taskbar. If you select it, the keys should behave much more in line with what's on the keycaps.
 
 ## Using the keyboard
 Keyboard layouts have evolved a LOT since the Commodore 64. There are a lot of keys that are essential for using a modern computer that are missing on the C64 keyboard. For some of those, I just repurposed keys as follows:
@@ -65,7 +65,7 @@ Keyboard layouts have evolved a LOT since the Commodore 64. There are a lot of k
 * Inst Del is Backspace
 
 There are also just some keys are too different from modern keys, and it's not clear what to do with them:
-* CRSR down and right send down and right arrow keys but you can't get to the up or left arrows just by holding shift (since shift+arrow means to select on modern systems)
+* CRSR down and right send down and right arrow keys, but you can't get to the up or left arrows just by holding shift (since shift+arrow means to select on modern systems)
 * Shift lock is NOT the same as a modern caps lock. It is electrically the same as just holding the left shift down.
 * F1 F3 F5 and F7 work as you'd expect, but there's no way to get to the even numbered keys since we need to be able to type shift+F1, etc as their own thing.
 
